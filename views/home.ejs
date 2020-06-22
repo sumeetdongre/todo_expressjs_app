@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+    <div id="main">
+        <br>
+        <h1 id="app-heading">ToDo App</h1>
+        <form action="/create-todo" method="POST">
+          
+            <div id="description-container">
+                <p>DESCRIPTION</p><br>
+                <input id="form-description" type="text" name="description" placeholder="what do you need to do?" required>
+            </div>
+
+
+        <div class="category-date-container">
+
+            <div id="category-container">
+                <p id="category-heading">CATEGORY</p>
+                <br>
+                <p>choose a category</p>
+                <select name="category">
+                    <option style="display:none"></option>
+                    <option value="personal">Personal</option>
+                    <option value="work">Work</option>
+                    <option value="school">School</option>
+                    <option value="cleaning">Cleaning</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div id="due-date-container">
+                <p>Due Date</p>
+                <br>
+                <input type="date" name="date" id="date-input-box" placeholder="" required>
+            </div>
+
+        </div>
+
+            <div class="buttons-container">
+                <div>
+                    <button type="submit" class="add-button">
+                        <i class="fa fa-plus" aria-hidden="true"></i> 
+                        &nbsp; ADD TASK
+                    </button>
+
+                    
+                </div>
+
+                &nbsp;
+
+                <div>
+                    <button type="submit" class="delete-button" form="delete1">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                        &nbsp; DELETE TASKS
+                    </button>
+                </div>
+            </div>
+        </form>
+        
+        <div class="show">
+            <form id="delete1" action="/delete-todo" method="POST">
+        
+                <%  for(let i = todo_list.length - 1; i >= 0; i--) { %>
+                <div id="task">
+
+                    <input type="checkbox" name="task" id="check-box" value="<%=todo_list[i]._id %>">
+
+                   <div class="task-container">
+                       <span id="task-description">
+                           <%=todo_list[i].description %>
+                       </span>
+                       <br>
+                       <span id="task-date">
+                           <%=todo_list[i].date %>
+                       </span>
+                   </div>
+
+                   <div id="task-category"> 
+                            <%= todo_list[i].category  %>
+                    </div>
+                </div>
+                <% } %>
+            </form>
+        </div>
+
+
+
+
+    </div>
+
+
+    
+</body>
+</html>
